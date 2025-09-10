@@ -54,7 +54,7 @@ if ! peers_json=$(btc getpeerinfo 2>/dev/null); then
     exit 1
 fi
 
-# Select peers that are 'libre' or advertise PREFERENTIAL_PEERING
+# Select peers that are 'libre' AND advertise PREFERENTIAL_PEERING
 # Use a while-read loop for better compatibility with macOS's older bash (no mapfile)
 target_addrs=()
 while IFS= read -r addr; do
@@ -66,7 +66,7 @@ done < <(printf '%s' "$peers_json" | jq -r '
 ')
 
 if [[ ${#target_addrs[@]} -eq 0 ]]; then
-    info "no libre or PREFERENTIAL_PEERING peers detected."
+    info "no peers with both libre connection type and PREFERENTIAL_PEERING service detected."
     exit 0
 fi
 

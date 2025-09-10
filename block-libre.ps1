@@ -94,7 +94,7 @@ foreach ($p in $peers) {
 }
 
 if ($targets.Count -eq 0) {
-    Write-Info "no libre or PREFERENTIAL_PEERING peers detected."
+    Write-Info "no peers with both libre connection type and PREFERENTIAL_PEERING service detected."
     exit 0
 }
 
